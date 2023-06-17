@@ -78,7 +78,7 @@ export default function RegistrationScreen() {
     },
     avatar:{
       position: 'absolute',
-      backgroundColor: 'red',
+      backgroundColor: '#F6F6F6',
       width: 120,
       height: 120,
       left: '33%',

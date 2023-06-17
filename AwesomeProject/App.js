@@ -1,8 +1,8 @@
 // import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
-// import RegisterScreen from './Screens/RegistrationScreen'
+import RegistrationScreen from './Screens/RegistrationScreen'
 // import LoginScreen from './Screens/LoginScreen'
-import PostsScreen from './Screens/PostsScreen'
+// import PostsScreen from './Screens/PostsScreen'
 import { useFonts } from 'expo-font';
 
 export default function App() {
@@ -17,11 +17,10 @@ export default function App() {
     return null;
   }
   return (
-    <View >
-      {/* <RegisterScreen/> */}
+    <View>
+      <RegistrationScreen/>
       {/* <LoginScreen/> */}
-      <PostsScreen/>
+      {/* <PostsScreen/> */}
     </View>
   );
 }
-

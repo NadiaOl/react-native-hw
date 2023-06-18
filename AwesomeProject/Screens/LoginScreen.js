@@ -1,6 +1,6 @@
 import React from "react";
-import { ImageBackground, StyleSheet, Text, TextInput, View, } from "react-native";
-import BackgroundImage from './img/PhotoBG.jpg'
+import { Image, ImageBackground, StyleSheet, Text, TextInput, View, } from "react-native";
+import BackgroundImage from './img/PhotoBGpng.png'
 
 
 export default function LoginScreen() {
@@ -8,7 +8,7 @@ export default function LoginScreen() {
   return (
 
       <View style={styles.container}>
-        <ImageBackground source={BackgroundImage} style={styles.backgroundImage}/>
+        <Image source={BackgroundImage} style={styles.backgroundImage}></Image>
         <View style={styles.registrationSection}>
 
           <Text style={styles.title}>Увійти</Text>
@@ -28,6 +28,7 @@ export default function LoginScreen() {
             textContentType="username"
             autoCompleteType="off"
           />
+          <Text style={styles.showPassword}>Показати</Text>
           <Text style={styles.button}>Увійти</Text>
           <Text style={styles.signIn}>Немає акаунту?  Зареєструватися</Text>
 
@@ -41,13 +42,15 @@ export default function LoginScreen() {
     container: {
       position: 'relative',
       fontFamily: 'Roboto-Regular',
+      
       flex: 1,
-      padding: 6,
+      padding: 10,
       width: 390,
+      marginTop: 18,
     },
 
     backgroundImage: {
-        flex: 1,
+
         justifyContent: "center",
         alignItems: "center",
     },
@@ -55,9 +58,9 @@ export default function LoginScreen() {
     registrationSection: {
       position: 'absolute',
       top: 280,
-      left: 6,
+      left: 12,
       width: '100%',
-      height: '100%',
+      height: 700,
       borderTopLeftRadius: 25,
       borderTopRightRadius: 25,
       backgroundColor: '#FFFFFF',
@@ -85,6 +88,13 @@ export default function LoginScreen() {
         borderColor: "#E8E8E8",
         color: "#212121",
         padding: 14,
+        fontSize: 16,
+    },
+    showPassword: {
+      position: 'absolute',
+      top: 193,
+      right: 40,
+      fontSize: 16,
     },
 
     button: {
@@ -95,13 +105,14 @@ export default function LoginScreen() {
       borderRadius: 100,
       padding: 12,
       textAlign: "center",
+      fontSize: 16,
     },
 
     signIn: {
 
       marginTop: 16,
-      color: '#1B4371'
-
+      color: '#1B4371',
+      fontSize: 16,
     }
     
 });

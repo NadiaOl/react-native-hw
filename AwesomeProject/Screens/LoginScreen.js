@@ -1,13 +1,21 @@
-import React from "react";
-import { Image, ImageBackground, StyleSheet, Text, TextInput, View, } from "react-native";
+import React, { useState } from "react";
+import { Image, StyleSheet, Text, TextInput, View, } from "react-native";
 import BackgroundImage from './img/PhotoBGpng.png'
 
 
+
 export default function LoginScreen() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  
+  const onLogin = () => {
+    console.log(`${password} + ${email}`);
+  };
 
   return (
 
       <View style={styles.container}>
+        <View style={styles.keyboard}>
         <Image source={BackgroundImage} style={styles.backgroundImage}></Image>
         <View style={styles.registrationSection}>
 
@@ -16,22 +24,25 @@ export default function LoginScreen() {
             style={styles.input}
             placeholderTextColor={'#BDBDBD'}
             placeholder="Адреса електронної пошти"
-            // value='value'
+            value={email}
             textContentType="username"
             autoCompleteType="off"
+            onChangeText={setEmail}
           />
           <TextInput
             style={styles.input}
             placeholderTextColor={'#BDBDBD'}
             placeholder="Пароль"
-            // value='value'
+            value={password}
             textContentType="username"
             autoCompleteType="off"
+            onChangeText={setPassword}
           />
           <Text style={styles.showPassword}>Показати</Text>
-          <Text style={styles.button}>Увійти</Text>
+          <Text style={styles.button} onPress={onLogin}>Увійти</Text>
           <Text style={styles.signIn}>Немає акаунту?  Зареєструватися</Text>
 
+        </View>
         </View>
       </View>
   )
@@ -40,25 +51,26 @@ export default function LoginScreen() {
   const styles = StyleSheet.create({
     
     container: {
-      position: 'relative',
       fontFamily: 'Roboto-Regular',
-      
-      flex: 1,
       padding: 10,
       width: 390,
+      justifyContent: "flex-end",
       marginTop: 18,
     },
 
-    backgroundImage: {
+    keyboard: {
+      position: 'relative',
+    },
 
+    backgroundImage: {
         justifyContent: "center",
         alignItems: "center",
     },
 
     registrationSection: {
       position: 'absolute',
-      top: 280,
-      left: 12,
+      top: 270,
+      left: 2,
       width: '100%',
       height: 700,
       borderTopLeftRadius: 25,
@@ -73,7 +85,7 @@ export default function LoginScreen() {
       fontFamily: 'Roboto-Medium',
       fontWeight: 500,
       color: "#212121",
-      marginTop: 32,
+      marginTop: 60,
       marginBottom: 33,
       fontSize: 30,
       textAlign: "center",
@@ -92,7 +104,7 @@ export default function LoginScreen() {
     },
     showPassword: {
       position: 'absolute',
-      top: 193,
+      top: 219,
       right: 40,
       fontSize: 16,
     },

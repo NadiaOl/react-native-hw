@@ -1,51 +1,65 @@
-import React from "react";
-import {Image, ImageBackground, ImageBackgroundComponent, StyleSheet, Text, TextInput, View, } from "react-native";
+import React, { useState } from "react";
+import {Image, KeyboardAvoidingView, StyleSheet, Text, TextInput, View, } from "react-native";
 import BackgroundImage from './img/PhotoBGpng.png'
 import Avatar from './img/Rectangle.jpg'
 import Add from './img/add.jpg'
-// import Image from './img/Addphoto.jpg'
 
 export default function RegistrationScreen() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onLogin = () => {
+    console.log(`${name} + ${password} + ${email}`);
+  };
 
   return (
 
       <View style={styles.container}>
+        <View style={styles.keyboard}>
           <Image source={BackgroundImage} style={styles.backgroundImage}></Image>
           <View style={styles.registrationSection}>
             
             <Image source={Avatar} style={styles.avatar}/>
             <Image source={Add} style={styles.addAvatar}/>
           <Text style={styles.title}>Реєстрація</Text>
+          <KeyboardAvoidingView
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
+      >
           <TextInput
             style={styles.input}
             placeholderTextColor={'#BDBDBD'}
             placeholder="Логін"
-            // value='Логін'
+            value={name}
             textContentType="username"
             autoCompleteType="off"
+            onChangeText={setName}
           />
           
           <TextInput
             style={styles.input}
             placeholderTextColor={'#BDBDBD'}
             placeholder="Адреса електронної пошти"
-            // value='Адреса електронної пошти'
+            value={email}
             textContentType="username"
             autoCompleteType="off"
+            onChangeText={setEmail}
           />
           <TextInput
             style={styles.input}
             placeholderTextColor={'#BDBDBD'}
             placeholder="Пароль"
-            // value='Пароль'
+            value={password}
             textContentType="username"
             autoCompleteType="off"
+            onChangeText={setPassword}
           />
-
+     </KeyboardAvoidingView>
           <Text style={styles.showPassword}>Показати</Text>
-          <Text style={styles.button}>Зареєстуватися</Text>
+          <Text style={styles.button} onPress={onLogin}>Зареєстуватися</Text>
 
           <Text style={styles.signIn}>Вже є акаунт? Увійти</Text>
+        </View>
         </View>
       </View>
   )
@@ -54,24 +68,26 @@ export default function RegistrationScreen() {
   const styles = StyleSheet.create({
     
     container: {
-      position: 'relative',
       fontFamily: 'Roboto-Regular',
-      flex: 1,
       padding: 10,
       width: 390,
+      justifyContent: "flex-end",
       marginTop: 18,
     },
 
-    backgroundImage: {
-        justifyContent: "center",
-        alignItems: "center",
+    keyboard: {
+      position: 'relative',
+    },
 
+    backgroundImage: {
+      justifyContent: "center",
+      alignItems: "center",
     },
 
     registrationSection: {
       position: 'absolute',
       top: 280,
-      left: 12,
+      left: 2,
       width: '100%',
       height: 700,
       borderTopLeftRadius: 25,
@@ -121,7 +137,6 @@ export default function RegistrationScreen() {
         borderRadius: 8,
         backgroundColor: "#F6F6F6",
         borderColor: "#E8E8E8",
-        color: "#212121",
         padding: 14,
         fontSize: 16,
     },

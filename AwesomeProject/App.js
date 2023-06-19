@@ -1,5 +1,4 @@
-// import { StatusBar } from 'expo-status-bar';
-import { View } from 'react-native';
+import { View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import RegistrationScreen from './Screens/RegistrationScreen'
 import LoginScreen from './Screens/LoginScreen'
 // import PostsScreen from './Screens/PostsScreen'
@@ -17,10 +16,12 @@ export default function App() {
     return null;
   }
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View>
       <RegistrationScreen/>
       {/* <LoginScreen/> */}
       {/* <PostsScreen/> */}
     </View>
+    </TouchableWithoutFeedback>
   );
 }

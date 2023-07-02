@@ -1,12 +1,18 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, Text, TextInput, View, } from "react-native";
+import { Image, StyleSheet, Text, TextInput, View } from "react-native";
 import BackgroundImage from './img/PhotoBGpng.png'
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 
 
 export default function LoginScreen() {
+
+  const navigation = useNavigation();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // const { params: { regEmail } } = useRoute();
   
   const onLogin = () => {
     console.log(`${password} + ${email}`);
@@ -39,8 +45,8 @@ export default function LoginScreen() {
             onChangeText={setPassword}
           />
           <Text style={styles.showPassword}>Показати</Text>
-          <Text style={styles.button} onPress={onLogin}>Увійти</Text>
-          <Text style={styles.signIn}>Немає акаунту?  Зареєструватися</Text>
+          <Text style={styles.button} onPress={() => navigation.navigate("Home")}>Увійти</Text>
+          <Text style={styles.signIn} onPress={() => navigation.navigate("Registration")}>Немає акаунту?  Зареєструватися</Text>
 
         </View>
         </View>
@@ -52,10 +58,10 @@ export default function LoginScreen() {
     
     container: {
       fontFamily: 'Roboto-Regular',
-      padding: 10,
+      padding: 7,
       width: 390,
       justifyContent: "flex-end",
-      marginTop: 18,
+
     },
 
     keyboard: {
@@ -69,8 +75,7 @@ export default function LoginScreen() {
 
     registrationSection: {
       position: 'absolute',
-      top: 270,
-      left: 2,
+      top: 320,
       width: '100%',
       height: 700,
       borderTopLeftRadius: 25,

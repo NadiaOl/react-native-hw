@@ -1,11 +1,7 @@
 import React from "react";
 import {Image, StyleSheet, Text, View, } from "react-native";
 import UserPhoto from './img/Userphoto.png'
-import LogOut from './img/log-out.jpg'
-import Menu from './img/grid.jpg'
-import AddPost from './img/new.jpg'
-import User from './img/user.png'
-
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 
 export default function PostsScreen() {
@@ -15,7 +11,7 @@ export default function PostsScreen() {
         <View style={styles.postPage}>
             <View style={styles.header}>             
                     <Text style={styles.title}>Публікації</Text>
-                    <Image source={LogOut} style={styles.logOut}/>
+                    <Ionicons name="log-out-outline" size={24} style={styles.logOut} />
             </View>
             <View style={styles.body}>
                 <View style={styles.userSection}>
@@ -26,11 +22,6 @@ export default function PostsScreen() {
                     </View>
                 </View>
             </View>
-            <View style={styles.footer}>
-                <Image source={Menu} style={styles.menuBtn}/>
-                <Image source={AddPost} style={styles.addPostBtn}/>
-                <Image source={User} style={styles.userBtn}/>
-        </View>
         </View>
 
     </View>
@@ -43,12 +34,13 @@ const styles = StyleSheet.create({
         position: 'relative',
         fontFamily: 'Roboto-Regular',
         padding: 6,
+        marginTop: 44,
         width: 390,
-        color: '#212121'
+        backgroundColor: 'white',
+        flex: 0,
     },
 
     postPage: {
-        marginTop: 44,
         height: 720,
         display: 'flex',
         justifyContent: 'space-between',
@@ -69,7 +61,9 @@ const styles = StyleSheet.create({
 
     logOut: {
         position: 'absolute',
+        top: 2,
         right: 10,
+        color: '#BDBDBD'
     },
     
     body: {
@@ -77,9 +71,9 @@ const styles = StyleSheet.create({
         paddingLeft: 16,
         paddingRight: 16,
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'flex-start',
-        height: 600,
+        height: 680,
         gap: 8,
     },
 
@@ -106,15 +100,5 @@ const styles = StyleSheet.create({
         fontSize: 11,
         fontWeight: 400,
     },
-    footer: {
-        display: 'flex',
-        alignContent: 'space-between',
-        gap: 31,
-        flexDirection: 'row',
-        paddingLeft: 82,
-        paddingRight: 82,
-        paddingTop: 10,
-        borderColor: '#BDBDBD',
-        borderTopWidth: 1,
-    },
+
 });

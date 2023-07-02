@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import {Image, KeyboardAvoidingView, StyleSheet, Text, TextInput, View, } from "react-native";
+
+import { useNavigation } from "@react-navigation/native";
+
 import BackgroundImage from './img/PhotoBGpng.png'
 import Avatar from './img/Rectangle.jpg'
 import Add from './img/add.jpg'
+
 
 export default function RegistrationScreen() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigation = useNavigation();
 
   const onLogin = () => {
     console.log(`${name} + ${password} + ${email}`);
@@ -56,9 +61,11 @@ export default function RegistrationScreen() {
           />
      </KeyboardAvoidingView>
           <Text style={styles.showPassword}>Показати</Text>
-          <Text style={styles.button} onPress={onLogin}>Зареєстуватися</Text>
+          <Text style={styles.button} onPress={() => 
+            navigation.navigate("Login", { regEmail: {email} })}
+            >Зареєстуватися</Text>
 
-          <Text style={styles.signIn}>Вже є акаунт? Увійти</Text>
+          <Text style={styles.signIn} onPress={() => navigation.navigate("Login")}>Вже є акаунт? Увійти</Text>
         </View>
         </View>
       </View>
@@ -69,10 +76,10 @@ export default function RegistrationScreen() {
     
     container: {
       fontFamily: 'Roboto-Regular',
-      padding: 10,
+      padding: 7,
       width: 390,
       justifyContent: "flex-end",
-      marginTop: 18,
+
     },
 
     keyboard: {
@@ -87,7 +94,6 @@ export default function RegistrationScreen() {
     registrationSection: {
       position: 'absolute',
       top: 280,
-      left: 2,
       width: '100%',
       height: 700,
       borderTopLeftRadius: 25,

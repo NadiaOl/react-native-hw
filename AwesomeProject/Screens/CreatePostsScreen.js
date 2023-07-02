@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, Text, TextInput, View } from "react-native";
+import { Image, StyleSheet, Text, TextInput, View, KeyboardAvoidingView } from "react-native";
 import PablicationPhoto from './img/Content.jpg'
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -19,6 +19,10 @@ export default function CreatePostsScreen() {
             <View style={styles.body}>
                 <Image source={PablicationPhoto}/>
                 <Text style={styles.editPhoto}>Редагувати фото</Text>
+                <Ionicons name="location-outline" size={24} style={styles.logLocation} />
+                <KeyboardAvoidingView
+                    behavior={Platform.OS == "ios" ? "padding" : "height"}
+                >
                 <TextInput
                     style={styles.input}
                     placeholderTextColor={'#BDBDBD'}
@@ -27,7 +31,6 @@ export default function CreatePostsScreen() {
                     textContentType="name"
                     onChangeText={setName}
                 />
-                <Ionicons name="location-outline" size={24} style={styles.logLocation} />
                 <TextInput
                     style={styles.inputLocation}
                     placeholderTextColor={'#BDBDBD'}
@@ -36,9 +39,11 @@ export default function CreatePostsScreen() {
                     textContentType="location"
                     onChangeText={setLocation}
                 />
+                </KeyboardAvoidingView>
                 <Text style={styles.button} onPress={() => navigation.navigate("Home")}>Опублікувати</Text>
+                <Ionicons name="trash-outline" size={24} style={styles.logTrash} />
             </View>                      
-            <Ionicons name="trash-outline" size={24} style={styles.logTrash} />
+
         </View>
     )
 
@@ -52,9 +57,9 @@ const styles = StyleSheet.create({
         padding: 6,
         marginTop: 44,
         width: 390,
-        height: 680,
+        height: 760,
         backgroundColor: 'white',
-        // flex: 0,
+
     },
 
     header: {
@@ -119,13 +124,25 @@ const styles = StyleSheet.create({
         height: 50,
         width: 343,
         marginTop: 27,
+        marginBottom: 100,
         backgroundColor:'#F6F6F6',
         color: '#BDBDBD',
         borderRadius: 100,
         padding: 12,
         textAlign: "center",
         fontSize: 16,
-      },
-  
+    },
+
+    logTrash: {
+        height: 50,
+        width: 80,
+        backgroundColor:'#F6F6F6',
+        alignSelf: 'center',
+        color: '#BDBDBD',
+        borderRadius: 100,
+        padding: 12,
+        textAlign: "center",
+
+    }
 
 })

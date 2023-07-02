@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, Text, TextInput, View } from "react-native";
+import { Image, StyleSheet, Text, TextInput, View, KeyboardAvoidingView } from "react-native";
 import BackgroundImage from './img/PhotoBGpng.png'
 import { useNavigation, useRoute } from "@react-navigation/native";
 
@@ -26,6 +26,9 @@ export default function LoginScreen() {
         <View style={styles.registrationSection}>
 
           <Text style={styles.title}>Увійти</Text>
+          <KeyboardAvoidingView
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
+      >
           <TextInput
             style={styles.input}
             placeholderTextColor={'#BDBDBD'}
@@ -44,6 +47,7 @@ export default function LoginScreen() {
             autoCompleteType="off"
             onChangeText={setPassword}
           />
+         </KeyboardAvoidingView>
           <Text style={styles.showPassword}>Показати</Text>
           <Text style={styles.button} onPress={() => navigation.navigate("Home")}>Увійти</Text>
           <Text style={styles.signIn} onPress={() => navigation.navigate("Registration")}>Немає акаунту?  Зареєструватися</Text>

@@ -23,14 +23,14 @@ export default function ProfileScreen() {
                 <Text style={styles.descriptionText}>Ліс</Text>
                 <View style={styles.details}>
                     <View style={styles.reactions}>
-                        <Ionicons name="chatbubble" size={25} style={styles.commentsIcon} />
-                        <Text>8</Text>
+                        <Ionicons name="chatbubble" onPress={() => navigation.navigate("Comments")} size={25} style={styles.commentsIcon} />
+                        <Text onPress={() => navigation.navigate("Comments")}>8</Text>
                         <Ionicons name="thumbs-up-outline" size={24} style={styles.likeIcon} />
                         <Text>153</Text>
                     </View>
                     <View style={styles.location}>
-                        <Ionicons name="location-outline" size={24} style={styles.logLocation} />
-                        <Text style={styles.locationText}>Ukraine</Text>
+                        <Ionicons name="location-outline" size={24} style={styles.logLocation} onPress={() => navigation.navigate("Map")}/>
+                        <Text style={styles.locationText} onPress={() => navigation.navigate("Map")}>Ukraine</Text>
                     </View>
                 </View>
             </View>
@@ -45,12 +45,11 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto-Regular',
         width: 390,
         justifyContent: "flex-end",
-        position: 'relative',
+        // position: 'relative',
     },
 
     backgroundImage: {
-        justifyContent: "center",
-        alignItems: "center",
+        width: "100%"
     },
 
     profileSection: {
@@ -61,9 +60,7 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
         backgroundColor: '#FFFFFF',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
+        paddingHorizontal: 16,
     },
 
     avatar:{
@@ -105,12 +102,11 @@ const styles = StyleSheet.create({
     },
 
     forest: {
-        width: 343,
+        width: "100%",
     },
 
     descriptionText: {
         alignSelf: 'flex-start',
-        marginLeft: 25,
         marginTop: 10,
     },
 
@@ -118,8 +114,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         marginTop: 8,
-        gap: 120,
-        alignContent: 'flex-start',
+        justifyContent: "space-between",
     },
 
     reactions: {

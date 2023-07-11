@@ -1,38 +1,81 @@
-import MapView, { Marker } from "react-native-maps";
+import React from "react";
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  Dimensions,
+  StyleSheet,
+} from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
-import { StyleSheet, View } from "react-native";
-
-const MapScreen = ({ route }) => {
-  const { longitude, latitude } = route.params.location;
-
-console.log(route.params);
+const MapScreen = () => {
+  const navigation = useNavigation();
+  const { params } = useRoute();
 
   return (
     <View style={styles.container}>
+
       <MapView
+        provider={PROVIDER_GOOGLE}
         style={styles.mapStyle}
+        mapType="standard"
+        minZoomLevel={13}
         region={{
-          latitude,
-          longitude,
+          ...params,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
       >
-        <Marker title="I am here" coordinate={{ latitude, longitude }} />
+        <Marker
+          title="I am here"
+          coordinate={{
+            latitude: 48.48,
+            longitude: 35.03,
+          }}
+          description="Hello"
+        />
       </MapView>
     </View>
   );
 };
 
-export default MapScreen;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
   },
+  header: {
+    paddingTop: 55,
+    paddingBottom: 11,
 
-  mapStyle: {
+    backgroundColor: "#FFFFFF",
+    borderBottomWidth: 1,
+    borderBottomColor: "rgba(0, 0, 0, 0.3)",
+  },
+  goBackBtn: {
+    position: "absolute",
+    bottom: 10,
+    left: 20,
+  },
+  headerText: {
+    textAlign: "center",
+    fontFamily: "Roboto-Medium",
+    fontSize: 17,
+    lineHeight: 22,
+    letterSpacing: -0.408,
+    color: "#212121",
+  },
+  content: {
     flex: 1,
+    paddingTop: 32,
+    paddingHorizontal: 16,
+    backgroundColor: "#FFFFFF",
+  },
+  mapStyle: {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
   },
 });
+
+export default MapScreen;

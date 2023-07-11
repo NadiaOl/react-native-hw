@@ -34,7 +34,7 @@ const MapScreen = () => {
             latitude: 48.48,
             longitude: 35.03,
           }}
-          description="Hello"
+
         />
       </MapView>
     </View>

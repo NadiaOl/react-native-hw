@@ -28,12 +28,7 @@ const Home = () => {
     <Tabs.Navigator
       screenOptions={{
         tabBarStyle: {
-          position: "absolute",
-          bottom: 0,
-          height: 83,
-          paddingTop: 9,
-          paddingBottom: 34,
-          paddingHorizontal: 5,
+          height: 60,
         },
         tabBarLabel: () => null,
       }}
@@ -76,7 +71,7 @@ const Home = () => {
 const styles = StyleSheet.create({
   tabBarButton: {
     flex: 1,
-    alignItems: "center",
+    height: 20,
     justifyContent: "center",
   },
   tabIcon: {

@@ -10,9 +10,8 @@ export default function CreatePostsScreen() {
     const [cameraRef, setCameraRef] = useState(null);
     const [photo, setPhoto] = useState("");
     const [comment, setComment] = useState("");
-    const [location, setLocation] = useState("");
+    const [location, setLocation] = useState([]);
     const [locationName, setLocationName] = useState("");
-
 
     const navigation = useNavigation();
     const [hasPermission, setHasPermission] = useState(null);
@@ -55,11 +54,14 @@ export default function CreatePostsScreen() {
             longitude: location.coords.longitude,
         };
         setLocation(coords);
-
+        console.log('photo', photo)
+        console.log('location', location)
     };
 
     const sendPhoto = () => {
-        navigation.navigate("Home", { photo });
+        navigation.navigate("Posts");
+        setLocation();
+        setPhoto();
     }
 
     return (

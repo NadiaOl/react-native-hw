@@ -7,13 +7,17 @@ import { useNavigation } from "@react-navigation/native";
 
 
 
-export default function PostsScreen({route}) {
+export default function PostsScreen({location, photo, route}) {
 const [posts, setPosts]= useState([]);
-const navigation = useNavigation();
+    const navigation = useNavigation();
 
+
+    console.log('route', route)
+    console.log('photo', photo)
+    
 useEffect(()=>{
     if(route.params) {
-        setPosts((prevState)=> [...prevState, route.params])
+        setPosts((prevState)=> [...prevState, photo])
     }
 }, [route.params]);
 

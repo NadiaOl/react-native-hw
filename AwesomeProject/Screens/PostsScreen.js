@@ -7,19 +7,17 @@ import { useNavigation } from "@react-navigation/native";
 
 
 
-export default function PostsScreen({location, photo, route}) {
+export default function PostsScreen({route}) {
 const [posts, setPosts]= useState([]);
     const navigation = useNavigation();
-
-
-    console.log('route', route)
-    console.log('photo', photo)
+    console.log('route', route.params)
     
 useEffect(()=>{
     if(route.params) {
-        setPosts((prevState)=> [...prevState, photo])
+        setPosts((prevState) => [...prevState, route.params]);
     }
 }, [route.params]);
+    console.log('posts', posts)
 
     return (
     <View style={styles.container}>
@@ -41,7 +39,6 @@ useEffect(()=>{
                     keyExtractor={(item, index) => {return index.toString()}}
                     renderItem={({ item }) => (
                     <View>
- 
                         <Image source={{ uri: item.photo }} style={styles.post} />
                     </View> )}
                 />

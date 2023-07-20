@@ -4,6 +4,8 @@ import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableWithoutFeedback, Keyboard } from 'react-native';
+import {Provider} from "react-redux";
+import {store} from "./redux/store";
 
 import RegistrationScreen from './Screens/RegistrationScreen';
 import LoginScreen from './Screens/LoginScreen';
@@ -32,19 +34,22 @@ export default function App() {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <NavigationContainer> 
-        <MainStack.Navigator initialRouteName="Registration"> 
-          <MainStack.Screen name="Registration" component={RegistrationScreen} options={{ headerShown: false, }}/>
-          <MainStack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
-          <MainStack.Screen name="Posts" component={PostsScreen} options={{ headerShown: false }}/>
-          <MainStack.Screen name="CreatePosts" component={CreatePostsScreen} options={{ headerShown: false }}/>
-          <MainStack.Screen name="Comments" component={CommentsScreen} />
-          <MainStack.Screen name="Profile" component={ProfileScreen} />
-          <MainStack.Screen name="Map" component={MapScreen} />
-          <MainStack.Screen name="Home" component={Home} options={{ headerShown: false }}/>          
-        </MainStack.Navigator>
-      </NavigationContainer>
+<Provider store={store}>
+        <NavigationContainer> 
+          <MainStack.Navigator initialRouteName="Registration"> 
+            <MainStack.Screen name="Registration" component={RegistrationScreen} options={{ headerShown: false, }}/>
+            <MainStack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
+            <MainStack.Screen name="Posts" component={PostsScreen} options={{ headerShown: false }}/>
+            <MainStack.Screen name="CreatePosts" component={CreatePostsScreen} options={{ headerShown: false }}/>
+            <MainStack.Screen name="Comments" component={CommentsScreen} />
+            <MainStack.Screen name="Profile" component={ProfileScreen} />
+            <MainStack.Screen name="Map" component={MapScreen} />
+            <MainStack.Screen name="Home" component={Home} options={{ headerShown: false }}/>          
+          </MainStack.Navigator>
+        </NavigationContainer>
+</Provider>
     </TouchableWithoutFeedback>
   );
 }
+
 

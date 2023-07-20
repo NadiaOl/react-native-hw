@@ -1,5 +1,17 @@
-import React, { useState } from "react";
-import {Image, KeyboardAvoidingView, StyleSheet, Text, TextInput, View, } from "react-native";
+import React, { useState, useEffect } from "react";
+import {Image,  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Platform,
+  KeyboardAvoidingView,
+  Keyboard,
+  TouchableWithoutFeedback,
+  Dimensions } from "react-native";
+
+
+  import {useDispatch} from "react-redux";
 
 import { useNavigation } from "@react-navigation/native";
 
@@ -7,19 +19,43 @@ import BackgroundImage from './img/PhotoBGpng.png'
 import Avatar from './img/Rectangle.jpg'
 import Add from './img/add.jpg'
 
+// import {authSignUpUser} from "../redux/auth/authOperations";
 
-export default function RegistrationScreen() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigation = useNavigation();
+const initialState = {
+  nickname: "",
+  email: "",
+  password: "",
+};
 
-  const onLogin = () => {
-    console.log(`${name} + ${password} + ${email}`);
+export default function RegistrationScreen({ navigation }) {
+  const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+  const [state, setstate] = useState(initialState);
+  const dispatch = useDispatch();
+  const [dimensions, setdimensions] = useState(
+    Dimensions.get("window").width - 20 * 2
+  );
+
+  useEffect(() => {
+    const onChange = () => {
+      const width = Dimensions.get("window").width - 20 * 2;
+      setdimensions(width);
+    };
+    Dimensions.addEventListener("change", onChange);
+    return () => {
+      Dimensions.removeEventListener("change", onChange);
+    };
+  }, []);
+
+const handleSubmit = () => {
+    setIsShowKeyboard(false);
+    Keyboard.dismiss();
+
+    // dispatch(authSignUpUser(state));
+    // setstate(initialState);
   };
 
   return (
-
+    <TouchableWithoutFeedback onPress={handleSubmit}>
       <View style={styles.container}>
         <View style={styles.keyboard}>
           <Image source={BackgroundImage} style={styles.backgroundImage}></Image>
@@ -35,40 +71,57 @@ export default function RegistrationScreen() {
             style={styles.input}
             placeholderTextColor={'#BDBDBD'}
             placeholder="Логін"
-            value={name}
+            onFocus={() => setIsShowKeyboard(true)}
+            value={state.nickname}
+            onChangeText={(value) =>
+              setstate((prevState) => ({ ...prevState, nickname: value }))
+            }
             textContentType="username"
             autoCompleteType="off"
-            onChangeText={setName}
           />
           
           <TextInput
             style={styles.input}
             placeholderTextColor={'#BDBDBD'}
             placeholder="Адреса електронної пошти"
-            value={email}
+            onFocus={() => setIsShowKeyboard(true)}
+            value={state.email}
+            onChangeText={(value) =>
+              setstate((prevState) => ({ ...prevState, email: value }))
+            }
             textContentType="username"
             autoCompleteType="off"
-            onChangeText={setEmail}
+  
           />
           <TextInput
             style={styles.input}
             placeholderTextColor={'#BDBDBD'}
             placeholder="Пароль"
-            value={password}
+            secureTextEntry={true}
+            onFocus={() => setIsShowKeyboard(true)}
+            value={state.password}
+            onChangeText={(value) =>
+              setstate((prevState) => ({ ...prevState, password: value }))
+            }
             textContentType="username"
             autoCompleteType="off"
-            onChangeText={setPassword}
           />
-     </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
           <Text style={styles.showPassword}>Показати</Text>
-          <Text style={styles.button} onPress={() => 
-            navigation.navigate("Login", { regEmail: {email} })}
-            >Зареєстуватися</Text>
+          <TouchableOpacity
+                onPress={handleSubmit}
+              >
+                <Text style={styles.button}>Зареєстуватися</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("Login")}
+              ></TouchableOpacity>
 
           <Text style={styles.signIn} onPress={() => navigation.navigate("Login")}>Вже є акаунт? Увійти</Text>
         </View>
         </View>
       </View>
+    </TouchableWithoutFeedback>
   )
 };
 
